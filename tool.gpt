@@ -1,0 +1,31 @@
+---
+Name: Telegram
+Description: Tools for using Telegram
+Metadata: bundle: true
+Share Tools: Read, Send
+Credential: ./credential
+
+---
+Name: Send
+Description: Send a Telegram Chat Message
+Tools: service
+Args: text: The message to send (required)
+Args: chatId: The chat ID to send the message to (required)
+Args: msgId: The message ID to reply to (optional)
+Credential: ./credential
+
+#!http://service.daemon.gptscript.local/send
+
+---
+Name: Read
+Description: Read the first unread Telegram message.
+Tools: service
+Credential: ./credential
+
+#!http://service.daemon.gptscript.local/message
+
+---
+Name: service
+Credential: ./credential
+
+#!sys.daemon ${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool
